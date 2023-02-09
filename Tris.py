@@ -1,6 +1,8 @@
 import pygame
 import random
 
+HUMAN = "X"
+AI = "O"
 
 def initialize():
     global count, running, screen, width, height, cell_width, cell_height, board, values, current_player
@@ -9,7 +11,7 @@ def initialize():
     width, height = 500, 500
     cell_width = width // 3
     cell_height = height // 3
-    current_player = "O"
+    current_player = AI 
     board = [["", "", ""] for i in range(3)]
     values = [[1, 1, 1] for i in range(3)]
     count = 0
@@ -64,7 +66,7 @@ def human_move():
                     for j in range(3):
                         if board[i][j] != "":
                             display_symbol(i,j)
-                current_player = "X" if current_player == "O" else "O"
+                current_player = HUMAN if current_player == AI else AI
                 count += 1
                 pygame.display.update()
 
@@ -95,7 +97,7 @@ def computer_move():
         board[i][j] = current_player
         values[i][j] = 5
         display_symbol(i,j)
-        current_player = "X" if current_player == "O" else "O"
+        current_player = HUMAN if current_player == AI else AI
         count += 1
         pygame.display.update()
 
@@ -151,10 +153,10 @@ def check_winner():
 
 def display_winner(current_player):
     player = current_player
-    player = "X" if player == "O" else "O"
+    player = HUMAN if player == AI else AI
     font_size = min(cell_width, cell_height) // 2
     font = pygame.font.Font(None, font_size)
-    winner = "You win!" if player == "X" else "AI wins!"
+    winner = "You win!" if player == HUMAN else "AI wins!"
     display_text(
         "{}".format(winner), font, screen, width // 2, height // 2
     )
@@ -184,7 +186,7 @@ initialize()
 
 while running:
 
-    if current_player == "X":
+    if current_player == HUMAN:
         human_move()
     else:
         computer_move()
