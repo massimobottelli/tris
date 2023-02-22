@@ -74,14 +74,14 @@ def human_move():
 def computer_move():
     global current_player, count
 
-    # calculate winning move
-    result = find_winning_move(values, 25)
+    # calculate best move
+    result = find_best_move(values, 25)
     if result is not None:
         i = result[0]
         j = result[1]
         print("Winning move: ", str(i), ",", str(j))
     else:
-        result = find_winning_move(values, 9)
+        result = find_best_move(values, 9)
         if result is not None:
             i = result[0]
             j = result[1]
@@ -102,7 +102,7 @@ def computer_move():
         pygame.display.update()
 
 
-def find_winning_move(values, check):
+def find_best_move(values, check):
     row_product = [1] * 3
     col_product = [1] * 3
     diagonal1_product = 1
